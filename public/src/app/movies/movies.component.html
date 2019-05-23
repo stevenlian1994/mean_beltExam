@@ -1,0 +1,22 @@
+<h2>Movie List</h2>
+<button (click)="initMovie()" [routerLink]="['new']">Add a new movie</button>
+<table>
+    <tr>
+        <th>Movie Title</th>
+        <th>Available Actions</th>
+        <th>Average Rating</th>
+    </tr>
+    <tr *ngFor="let movie of allMovies">
+        <td>{{movie.title}}</td>
+        <td><button (click)="selectMovie(movie)" [routerLink]="['/movies', movie._id]">Read reviews</button>
+            <button (click)="selectMovie(movie)" [routerLink]="['/movies', movie._id, 'review']">Write review</button></td>
+        <td>
+            {{movie.average_rating}}
+        </td>
+    </tr>
+</table>
+<!-- <app-new *ngIf="newMovie" ></app-new> -->
+<app-new *ngIf="newMovie" (myEventEmitter)="invoke($event)" [newMovie] = "newMovie" ></app-new>
+
+
+

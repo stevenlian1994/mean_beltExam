@@ -1,13 +1,27 @@
-<h1>Create Product:</h1>
-<form (submit)="createProduct()">
-    <label for="title"> Title:
-        <input [(ngModel)]="newProduct.title" type="text" name="newProduct.title">
-    </label>
-    <label for="price"> Price:
-        <input [(ngModel)]="newProduct.price" type="text" name="newProduct.price">
-    </label>
-    <label for="image_url"> Image url:
-        <input [(ngModel)]="newProduct.image_url" type="text" name="newProduct.image_url">
-    </label>
-    <input type="submit" value="submit">
-</form>
+<h1>Submit a movie and your review</h1>
+<p *ngIf="newMovie.title.length<3 && newMovie.title!='' ">Title must be at least 3 characters long</p>
+<p *ngIf="newReview.name.length<3 && newReview.name!='' ">Name must be at least 3 characters long</p>
+<p *ngIf="newReview.content.length<3 && newReview.content!='' ">Review must be at least 3 characters long</p>
+<form (submit)="createMovie()">
+    <label for="title"> Movie Title:
+        <input [(ngModel)]="newMovie.title" type="text" name="newMovie.title">
+    </label><br>
+    <label for="name"> Your Name:
+        <input [(ngModel)]="newReview.name" type="text" name="newReview.name">
+    </label><br>
+    <label for="stars"> Stars:
+        <!-- <input [(ngModel)]="newMovie.stars" type="text" name="newMovie.stars"> -->
+        <select [(ngModel)]="newReview.stars"  name="newReview.stars">
+            <option value="5">5 </option>
+            <option value="4">4 </option>
+            <option value="3">3 </option>
+            <option value="2">2 </option>
+            <option value="1">1 </option>
+        </select> 
+    </label><br>
+    <label for="newReview"> Your review:
+        <input [(ngModel)]="newReview.content" type="text" name="newReview.content">
+    </label><br>
+    <input type="submit" value="submit" [disabled]="newReview.name.length<3 || newReview.content.length<3 || newMovie.title.length<3">
+    </form>
+    <button (click)="cancelNew()">Cancel</button>

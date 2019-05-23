@@ -1,0 +1,24 @@
+
+<h3>Add a review for {{selectedMovie.title}}</h3>
+<p *ngIf="newReview.name.length<3 && newReview.name!='' ">Name must be at least 3 characters long</p>
+<p *ngIf="newReview.content.length<3 && newReview.content!='' ">Review must be at least 3 characters long</p>
+<form (submit)="addReview()">
+        <label for="name"> Your Name:
+            <input [(ngModel)]="newReview.name" type="text" name="newReview.name">
+        </label><br>
+        <label for="stars"> Stars:
+            <!-- <input [(ngModel)]="newMovie.stars" type="text" name="newMovie.stars"> -->
+            <select [(ngModel)]="newReview.stars"  name="newReview.stars">
+                    <option value="5">5 </option>
+                    <option value="4">4 </option>
+                    <option value="3">3 </option>
+                    <option value="2">2 </option>
+                    <option value="1">1 </option>
+            </select> 
+        </label><br>
+        <label for="newReview"> Your review:
+            <input [(ngModel)]="newReview.content" type="text" name="newReview.content">
+        </label><br>
+        <input type="submit" value="submit" [disabled]="newReview.name.length<3 || newReview.content.length<3">
+    </form>
+    <button (click)="reroute()">Cancel</button>

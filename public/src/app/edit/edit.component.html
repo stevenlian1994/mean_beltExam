@@ -1,12 +1,16 @@
-<form (submit)="updateProduct()">
-    <label for="title"> Title
-        <input [(ngModel)]="updatedProduct2.title" type="text" name="updatedProduct2.title" >
-    </label>
-    <label for="title"> Price
-        <input [(ngModel)]="updatedProduct2.price" type="text" name="updatedProduct2.price">
-    </label>
-    <label for="title"> Image url
-        <input [(ngModel)]="updatedProduct2.image_url" type="text" name="updatedProduct2.image_url">
-    </label>
-    <input type="submit" value="Update">
-</form>
+<button (click)="deleteMovie()">DELETE MOVIE</button>
+<h2>Reviews for {{selectedMovie.title}}</h2>
+<table>
+    <tr>
+        <th>Reviewer</th>
+        <th>Stars</th>
+        <th>Reviews</th>
+        <th>Actions</th>
+    </tr>
+    <tr *ngFor="let review of selectedMovie.reviews">
+        <td>{{review.name}}</td>
+        <td>{{review.stars}}</td>
+        <td>{{review.content}}</td>
+        <td><button (click)="deleteReview(review)">Delete</button></td>
+    </tr>
+</table>

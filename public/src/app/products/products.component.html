@@ -9,6 +9,7 @@
 <div *ngFor="let product of allProducts">
     <img src="{{product.image_url}}" alt="">
     <p>{{product.title}}</p>
+    <p *ngIf=avgRating >average: {{avgRating}}</p>
     <p>${{product.price}}</p>
     <p><button (click)="selectProduct(product)" [routerLink]="['edit/1']">Edit</button><button (click)="deleteProduct(product)">Delete</button></p>
     <form class="review-content" (submit)="createReview(product)">
@@ -25,6 +26,7 @@
     <div *ngFor="let review of product.reviews">
         <p>{{review.rating}}</p>
         <p>{{review.comment}}</p>
+        <button (click)="deleteReview(product,review)">delete</button>
     </div>
 </div>
 

@@ -3,11 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { NewComponent } from './new/new.component';
+import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'products', component: ProductsComponent, children: [
-
+        { path: 'edit/:id', component: EditComponent },
     ]} ,
     { path: 'new', component: NewComponent },
 ];

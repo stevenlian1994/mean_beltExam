@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NewComponent } from './new/new.component';
 import { ProductsComponent } from './products/products.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NewComponent,
-    ProductsComponent
+    ProductsComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

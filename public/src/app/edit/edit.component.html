@@ -1,0 +1,12 @@
+<form (submit)="updateProduct()">
+    <label for="title"> Title
+        <input [(ngModel)]="updatedProduct2.title" type="text" name="updatedProduct2.title" >
+    </label>
+    <label for="title"> Price
+        <input [(ngModel)]="updatedProduct2.price" type="text" name="updatedProduct2.price">
+    </label>
+    <label for="title"> Image url
+        <input [(ngModel)]="updatedProduct2.image_url" type="text" name="updatedProduct2.image_url">
+    </label>
+    <input type="submit" value="Create">
+</form>

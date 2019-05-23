@@ -7,19 +7,64 @@ var path = require('path')
 //1. create mongoose connection to db
 mongoose.connect('mongodb://localhost/beltExam')
 //2. set schema
-// var ProductSchema = new mongoose.Schema({
-//     title: {type:String, min:[4, 'Title is not long enough'], required:true},
-//     price: {type: Number, required:true},
-//     image_url: String,
-// });
+var ProductSchema = new mongoose.Schema({
+    title: String,
+    price: Number,
+    image_url: String,
+});
 // //3. save schema
-// mongoose.model('Product', ProductSchema)
+mongoose.model('Product', ProductSchema)
 // //4. retrieve schema to use in routes
-// var Product = mongoose.model('Product')
+var Product = mongoose.model('Product')
 
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public/dist/public' ));
+
+app.get('/readAllProducts', function(req,res){
+    Product.find({}, function(err,products){
+        if(err){
+            console.log('something went wrong');
+        } else {
+            res.json({products})
+        }
+    })
+})
+
+app.post('/createProduct', function(req,res){
+    console.log('inside server', req.body)
+    var product = new Product(req.body)
+    product.save(function(err){
+        if(err){
+            console.log('something went wrong', err.errors);
+            res.json(err)
+        } else {
+            console.log('successfully added asdf', product)
+            res.json(product)
+        }
+    })
+})
+
+app.put('/updateProduct', function(req,res){
+    Product.update({_id:req.param('_id')}, req.body, function(err){
+        if(err){
+            console.log(err)
+        } else {
+            res.json({message:'succesfully updated product'})
+        }
+    })
+})
+
+app.delete('/deleteProduct/:id', function(req,res){
+    console.log('inside server:', req.param('id') )
+    Product.deleteOne({_id: req.param('id')}, function(err, product){
+        if(err){
+            console.log(err)
+        } else {
+            return res.json(product);
+        }
+    })
+})
 
 app.all("*", (req,res,next) => {
     res.sendFile(path.resolve("./public/dist/public/index.html"))

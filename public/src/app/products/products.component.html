@@ -1,3 +1,16 @@
-<p>
-  products works!
-</p>
+<style>
+    img{
+        height:200px;
+        width:200px;
+    
+    }
+</style>
+<h1>Products List</h1>
+<div *ngFor="let product of allProducts">
+    <img src="{{product.image_url}}" alt="">
+    <p>{{product.title}}</p>
+    <p>${{product.price}}</p>
+    <p><button (click)="selectProduct(product)" [routerLink]="['edit/1']">Edit</button><button (click)="deleteProduct(product)">Delete</button></p>
+</div>
+
+<app-edit *ngIf="selectedProduct" (myEventEmitter)="invoke($event)" [updatedProduct] = "selectedProduct"></app-edit>

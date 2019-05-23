@@ -5,12 +5,27 @@
     
     }
 </style>
-<h1>pro List</h1>
+<h1>Product List</h1>
 <div *ngFor="let product of allProducts">
     <img src="{{product.image_url}}" alt="">
     <p>{{product.title}}</p>
     <p>${{product.price}}</p>
     <p><button (click)="selectProduct(product)" [routerLink]="['edit/1']">Edit</button><button (click)="deleteProduct(product)">Delete</button></p>
+    <form class="review-content" (submit)="createReview(product)">
+        <select [(ngModel)]="newReview.rating"  name="newReview.rating">
+            <option value="5">5 stars</option>
+            <option value="4">4 stars</option>
+            <option value="3">3 stars</option>
+            <option value="2">2 stars</option>
+            <option value="1">1 stars</option>
+        </select> <br>
+        <textarea [(ngModel)]="newReview.comment" name="newReview.comment" id="" cols="30" rows="3" placeholder="Type your comment here"></textarea>
+        <input type="submit" value="Rate!">
+    </form>
+    <div *ngFor="let review of product.reviews">
+        <p>{{review.rating}}</p>
+        <p>{{review.comment}}</p>
+    </div>
 </div>
 
 <app-edit *ngIf="selectedProduct" (myEventEmitter)="invoke($event)" [updatedProduct] = "selectedProduct"></app-edit>

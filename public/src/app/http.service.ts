@@ -23,4 +23,8 @@ export class HttpService {
         console.log('inside service:', product._id)
         return this._httpClient.delete(`/deleteProduct/${product._id}`);
     }
+    createReview(review){
+        console.log('inside service, create review')
+        return this._httpClient.post('/createReview', review);
+    }
 }
